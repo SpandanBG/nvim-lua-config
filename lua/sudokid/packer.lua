@@ -17,7 +17,10 @@ return require('packer').startup(function(use)
   }
 
   -- Color Scheme
-  use('marko-cerovac/material.nvim');
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
 
   -- Tree Sitter
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' });
