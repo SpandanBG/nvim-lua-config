@@ -1,0 +1,5 @@
+require("sudokid.colorscheme")
+require("sudokid.set")
+require("sudokid.lsp")
+require("sudokid.packer")
+require("sudokid.remap")
