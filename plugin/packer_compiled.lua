@@ -144,10 +144,20 @@ _G.packer_plugins = {
     path = "/Users/spandan/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
+  ["vim-autoclose"] = {
+    loaded = true,
+    path = "/Users/spandan/.local/share/nvim/site/pack/packer/start/vim-autoclose",
+    url = "https://github.com/townk/vim-autoclose"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/spandan/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-gitgutter"] = {
+    loaded = true,
+    path = "/Users/spandan/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
+    url = "https://github.com/airblade/vim-gitgutter"
   }
 }
 
