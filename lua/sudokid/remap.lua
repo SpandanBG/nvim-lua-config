@@ -14,9 +14,8 @@ vim.keymap.set("n", "<leader>tr", function()
   vim.cmd.TabooRename(vim.fn.input("rename tab > "))
 end)
 
--- Add copy-paste form clipboard
+-- Add copy-paste form clipboard (use `C-p` in insert mode to paste from clipboard)
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>p", '"+p')
 
 -- Move highlighted line up / down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -27,7 +26,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Replace highlighted with copied text
-vim.keymap.set("x", "<leader>P", '"_dP')
+vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- Remove the annoying `Q` -_-
 vim.keymap.set("n", "Q", "<nop>")
