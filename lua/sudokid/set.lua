@@ -6,14 +6,14 @@ vim.opt.textwidth = 0 				      -- Hard wrap long line as you type them
 vim.opt.linespace = 0 				      -- Set line space to 0
 vim.opt.splitbelow = true           -- Set horizontal split below of current
 vim.opt.splitright = true           -- Set vertical split right of current
-vim.opt.scrolloff = 3 				      -- Show next 3 lines while scrolling
+vim.opt.scrolloff = 12 				      -- Show next 12 lines while scrolling
 vim.opt.sidescrolloff = 5 			    -- Show next 5 column while side scrolling
 vim.opt.showmode = true             -- Show which mode vim is running in
 vim.opt.cmdheight = 2               -- Set cmd height at 2
 vim.opt.updatetime = 100            -- Set quicker update time
 vim.opt.signcolumn = "yes"          -- Show sign column
 vim.opt.colorcolumn = "80"          -- Set column color at 80
-vim.o.termguicolors = true        -- Use good colors
+vim.o.termguicolors = true          -- Use good colors
 
 -- Set tab to 2 whitespaces
 vim.opt.smartindent = true
