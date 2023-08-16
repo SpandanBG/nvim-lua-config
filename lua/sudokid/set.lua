@@ -1,5 +1,6 @@
 vim.opt.nu = true        			      -- Show line number 
 vim.opt.cul = true                  -- Highlight current line
+vim.opt.relativenumber = true       -- Show relative line number
 vim.opt.ruler = true 				        -- Show the line and column number of the cursor
 vim.opt.textwidth = 0 				      -- Hard wrap long line as you type them
 vim.opt.linespace = 0 				      -- Set line space to 0
