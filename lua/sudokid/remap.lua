@@ -43,3 +43,6 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left>
 vim.keymap.set("n", "<leader>T", "<C-w>v|:terminal<CR>")    -- Open Terminal
 vim.keymap.set("t", "<leader><ESC>", "<C-\\><C-n>|:q!<CR>") -- Exit Terminal
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")                 -- Esc `terminal` mode
+
+-- Copy file path
+vim.keymap.set("n", "<leader>cp", ':let @" = expand("%")<CR>')
