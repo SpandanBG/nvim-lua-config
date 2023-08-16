@@ -13,7 +13,7 @@ vim.opt.cmdheight = 2               -- Set cmd height at 2
 vim.opt.updatetime = 100            -- Set quicker update time
 vim.opt.signcolumn = "yes"          -- Show sign column
 vim.opt.colorcolumn = "80"          -- Set column color at 80
-vim.opt.termguicolors = true        -- Use good colors
+vim.o.termguicolors = true        -- Use good colors
 
 -- Set tab to 2 whitespaces
 vim.opt.smartindent = true
