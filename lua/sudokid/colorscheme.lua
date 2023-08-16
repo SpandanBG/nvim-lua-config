@@ -218,3 +218,7 @@ ins_right {
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)
+
+-- Set color scheme
+vim.cmd("colorscheme material")
+vim.g.material_style = "darker"
