@@ -17,3 +17,8 @@ vim.keymap.set('n', '<leader>gf', function()
   };
   builtin.live_grep(opts);
 end)
+
+-- Find keyword in current file
+vim.keymap.set('n', "<leader>cf", function() 
+  builtin.live_grep({ search_dirs = { "%:p" } })
+end)
