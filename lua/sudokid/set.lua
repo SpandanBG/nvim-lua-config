@@ -35,14 +35,3 @@ vim.opt.smartcase = true
 
 -- Map leader key
 vim.g.mapleader = " "
-
--- Enable fold and unfold using treesitter
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.wo.foldenable = false
--- quick fix for treesitter fold cause broken by telescope
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = { "*" },
-  command = "normal zx"
-})
-vim.cmd[[autocmd BufWinEnter * setlocal nofoldenable]]
