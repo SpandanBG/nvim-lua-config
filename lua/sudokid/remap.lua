@@ -46,3 +46,9 @@ vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")                 -- Esc `terminal` mo
 
 -- Copy file path
 vim.keymap.set("n", "<leader>cp", ':let @+ = expand("%")<CR>')
+
+-- Add Ctrl+S to save
+vim.keymap.set("n", "<C-s>", ":w<CR>")
+
+-- Set <leader>v as the Vertical select for Windows
+vim.keymap.set("n", "<leader>v", "<C-v>")
