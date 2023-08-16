@@ -38,3 +38,8 @@ end)
 
 -- Rename current word
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]])
+
+-- Remap for terminal
+vim.keymap.set("n", "<leader>T", "<C-w>v|:terminal<CR>")    -- Open Terminal
+vim.keymap.set("t", "<leader><ESC>", "<C-\\><C-n>|:q!<CR>") -- Exit Terminal
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")                 -- Esc `terminal` mode
