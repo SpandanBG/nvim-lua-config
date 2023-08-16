@@ -19,12 +19,13 @@ lsp.ensure_installed({
 -- Setup Keybindngs for auto complete selection
 local cmp = require('cmp')
 local cmp_select_opts = {behavior = cmp.SelectBehavior.Select}
+local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
 	mapping = {
 		['<CR>'] = cmp.mapping.confirm({select = false }),
-		['<Shift-Tab>'] = cmp.mapping.select_prev_item(cmp_select_opts),
-		['<Tab>'] = cmp.mapping.select_next_item(cmp_select_opts),
+		['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+		['<Tab>'] = cmp_action.tab_complete(),
 	}
 })
 
