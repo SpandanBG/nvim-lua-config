@@ -1,5 +1,11 @@
 local builtin = require('telescope.builtin')
 
+-- Add Telescope LSP Handlers
+require('telescope').load_extension('lsp_handlers')
+
+-- Add DAP Handler
+require('telescope').load_extension('dap')
+
 -- Find all Files
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 
