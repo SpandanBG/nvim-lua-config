@@ -54,6 +54,15 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- LSP Telescope handler
+  use('gbrlsnchs/telescope-lsp-handlers.nvim')
+
   -- Auto pair brackets, parent, quotes
   use('townk/vim-autoclose')
+
+  -- DAPs
+  use('mfussenegger/nvim-dap')
+  use('nvim-telescope/telescope-dap.nvim')
+  use('leoluz/nvim-dap-go')
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 end)
