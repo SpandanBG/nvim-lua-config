@@ -1,6 +1,3 @@
-require("dapui").setup()
-require("dap-go").setup()
-
 -- DAP Keymaps
 vim.keymap.set("n", "<leader>4", ":lua require('dap').run_last()<CR>")
 vim.keymap.set("n", "<leader>5", ":lua require('dap').continue()<CR>")
