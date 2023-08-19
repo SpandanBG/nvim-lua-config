@@ -1,7 +1,12 @@
 local dap = require("dap")
 
 
-local function listDir(path)
+local ExecTypes = {
+  TEST = "1",
+  MAIN = "2"
+}
+
+local function getFilesInDir(path)
   local i, t = 0, {}
   local pfile = assert(io.popen('find "'..path..'" -executable -type f '))
   for filename in pfile:lines() do
@@ -28,6 +33,13 @@ local function getFileBySymLinkCount(files, count)
   end
 end
 
+local function getRustExecutable(fromDir, type)
+  local files = getFilesInDir(fromDir)
+  local selected_file = getFileBySymLinkCount(files, type)
+  local filename = selected_file:match('^.*/(.*)$')
+  return vim.fn.getcwd() .. "/" .. fromDir .. filename
+end
+
 
 dap.adapters.lldb = {
   type = "executable",
@@ -41,15 +53,8 @@ dap.configurations.rust = {
     type = "lldb",
     request = "launch",
     program = function ()
-      local basePath = 'target/debug/deps/'
-
       vim.fn.jobstart('cargo build --test')
-
-      local files = listDir(basePath)
-      local selected_file = getFileBySymLinkCount(files, "1")
-      local filename = selected_file:match('^.*/(.*)$')
-
-      return vim.fn.getcwd() .. "/" .. basePath .. filename
+      return getRustExecutable('target/debug/deps/', ExecTypes.TEST)
     end,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
@@ -60,15 +65,8 @@ dap.configurations.rust = {
     type = "lldb",
     request = "launch",
     program = function ()
-      local basePath = 'target/debug/'
-
       vim.fn.jobstart('cargo build')
-
-      local files = listDir(basePath)
-      local selected_file = getFileBySymLinkCount(files, "2")
-      local filename = selected_file:match('^.*/(.*)$')
-
-      return vim.fn.getcwd() .. "/" .. basePath .. filename
+      return getRustExecutable('target/debug/', ExecTypes.MAIN)
     end,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
