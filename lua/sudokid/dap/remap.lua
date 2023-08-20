@@ -12,6 +12,4 @@ vim.keymap.set("n", "<leader>cb", ":lua require('dap').clear_breakpoints()<CR>")
 vim.keymap.set("n", "<leader>dgt", ":lua require('dap-go').debug_test()<CR>")
 
 -- DAP UI
-vim.keymap.set("n", "<leader>duo", ":lua require('dapui').open()<CR>")
-vim.keymap.set("n", "<leader>duq", ":lua require('dapui').close()<CR>")
-
+vim.keymap.set("n", "<leader>=", ":lua require('dapui').toggle()<CR>")
