@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
 
   -- Tree Sitter
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' });
+  use('nvim-treesitter/nvim-treesitter-context');
 
   -- Tabs
   use('gcmt/taboo.vim');

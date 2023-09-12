@@ -1,6 +1,6 @@
 local lsp = require('lsp-zero').preset({})
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
 	lsp.default_keymaps({buffer = bufnr})
@@ -13,12 +13,12 @@ lsp.ensure_installed({
 	'tsserver',
 	'eslint',
 	'rust_analyzer',
-	'gopls'
+	'gopls',
+  'html'
 })
 
 -- Setup Keybindngs for auto complete selection
 local cmp = require('cmp')
-local cmp_select_opts = {behavior = cmp.SelectBehavior.Select}
 local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
