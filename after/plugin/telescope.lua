@@ -1,3 +1,10 @@
+-- Setup Telescope
+require('telescope').setup {
+  defaults = {
+    path_display = { shorten = 4 },
+  }
+}
+
 local builtin = require('telescope.builtin')
 
 -- Add Telescope LSP Handlers
@@ -16,7 +23,7 @@ vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
 vim.keymap.set('n', '<leader>pf', builtin.live_grep, {})
 
 -- Find keyword in all git file
-vim.keymap.set('n', '<leader>gf', function() 
+vim.keymap.set('n', '<leader>gf', function()
   local git_dir = vim.api.nvim_exec("!git rev-parse --show-toplevel", false);
   local opts = {
     cmd = git_dir
@@ -25,6 +32,6 @@ vim.keymap.set('n', '<leader>gf', function()
 end)
 
 -- Find keyword in current file
-vim.keymap.set('n', "<leader>cf", function() 
+vim.keymap.set('n', "<leader>cf", function()
   builtin.live_grep({ search_dirs = { "%:p" } })
 end)
