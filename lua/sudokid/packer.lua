@@ -65,7 +65,13 @@ return require('packer').startup(function(use)
   use('mfussenegger/nvim-dap')
   use('nvim-telescope/telescope-dap.nvim')
   use('leoluz/nvim-dap-go')
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
+  use {
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install && npx gulp vsDebugServerBundle && mv dist out"
+  }
 
   -- Harpoon
   use('ThePrimeagen/harpoon')

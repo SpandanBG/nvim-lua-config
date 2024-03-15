@@ -8,3 +8,6 @@
 ```
 
 - `sudo apt install lua5.3 fzf ripgrep`
+
+- Vscode-Js-Debug:
+When you run `:PackerUpdate` to install the `microsoft/vscode-js-debug`, make sure the node version is `lts/hydrogen`
