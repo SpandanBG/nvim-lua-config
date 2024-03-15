@@ -66,4 +66,7 @@ return require('packer').startup(function(use)
   use('nvim-telescope/telescope-dap.nvim')
   use('leoluz/nvim-dap-go')
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
+  -- Harpoon
+  use('ThePrimeagen/harpoon')
 end)
