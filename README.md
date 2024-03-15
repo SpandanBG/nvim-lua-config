@@ -11,3 +11,7 @@
 
 - Vscode-Js-Debug:
 When you run `:PackerUpdate` to install the `microsoft/vscode-js-debug`, make sure the node version is `lts/hydrogen`
+
+## DAP
+- Node DAPs
+Make sure your node version setting is at `lts/hydrogen` when you run it

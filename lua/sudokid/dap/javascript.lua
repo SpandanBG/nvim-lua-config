@@ -39,6 +39,18 @@ local js_based_languages = {
 
 for _, lang in ipairs(js_based_languages) do
   dap.configurations[lang] = {
+    -- Debug Jest
+    {
+      name = 'Jest Test',
+      type = 'pwa-node',
+      request = 'launch',
+      program = '${workspaceFolder}/node_modules/.bin/jest',
+      args = { '${fileBasename}', '--runInBand' },
+      cwd = vim.fn.getcwd(),
+      protocol = 'inspector',
+      console = 'integratedTerminal',
+    },
+
     -- Debug single nodejs files
     {
       type = "pwa-node",
