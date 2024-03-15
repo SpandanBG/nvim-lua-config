@@ -8,7 +8,7 @@ vim.keymap.set("n", "<F10>", ":lua require('dap').step_into()<CR>")
 vim.keymap.set("n", "<F11>", ":lua require('dap').step_out()<CR>")
 vim.keymap.set("n", "<F3>", ":lua require('dap').toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<F4>", ":lua require('dap').clear_breakpoints()<CR>")
-
+vim.keymap.set("n", "<leader><F3>", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint Condition: '))<CR>")
 
 -- DAP UI
 vim.keymap.set("n", "<leader>=", ":lua require('dapui').toggle()<CR>")

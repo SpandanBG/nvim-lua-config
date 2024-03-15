@@ -52,3 +52,7 @@ vim.keymap.set("n", "<leader>v", "<C-v>")
 
 -- Add Ctrl+S to save
 vim.keymap.set("n", "<C-s>", ":w<CR>")
+
+-- Jump to error
+vim.keymap.set('n', ']e', vim.diagnostic.goto_next, { noremap = true, silent = true })
+vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, { noremap = true, silent = true })
