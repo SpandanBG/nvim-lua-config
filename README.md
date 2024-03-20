@@ -7,7 +7,7 @@
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
-- `sudo apt install lua5.3 fzf ripgrep`
+- `sudo apt install lua5.3 fzf ripgrep fd`
 
 - Vscode-Js-Debug:
 When you run `:PackerUpdate` to install the `microsoft/vscode-js-debug`, make sure the node version is `lts/hydrogen`
