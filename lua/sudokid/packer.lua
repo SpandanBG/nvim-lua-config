@@ -75,9 +75,6 @@ local function utilities(use)
   -- Undo Tree
   use('mbbill/undotree');
 
-  -- Auto pair brackets, parent, quotes
-  use('townk/vim-autoclose')
-
   -- Harpoon
   use('ThePrimeagen/harpoon')
 
@@ -85,6 +82,9 @@ local function utilities(use)
   -- `gcc` to comment & `gcgc` to uncomment
   -- in select move `gc` toggles between comment and uncomment
   use('tpope/vim-commentary')
+
+  -- MINI tools
+  use('echasnovski/mini.nvim')
 end
 
 return require('packer').startup(function(use)
