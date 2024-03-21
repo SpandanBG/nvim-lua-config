@@ -15,3 +15,6 @@ When you run `:PackerUpdate` to install the `microsoft/vscode-js-debug`, make su
 ## DAP
 - Node DAPs
 Make sure your node version setting is at `lts/hydrogen` when you run it
+
+## LSP Problems
+1. For the error: `query error: invalid node type at position`, follow solution [here](https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position)
