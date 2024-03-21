@@ -21,11 +21,13 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-  use('marko-cerovac/material.nvim')
+  -- use('marko-cerovac/material.nvim')
+  use('rebelot/kanagawa.nvim')
 
   -- Tree Sitter
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' });
   use('nvim-treesitter/nvim-treesitter-context');
+  use('nvim-treesitter/playground');
 
   -- Tabs
   use('gcmt/taboo.vim');

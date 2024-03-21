@@ -5,5 +5,5 @@
 -- And the following config in `~/.zshrc`
 -- export TERM=xterm-256color
 
-vim.cmd("colorscheme material")
-vim.g.material_style = "darker"
+-- vim.cmd("colorscheme material")
+-- vim.g.material_style = "darker"

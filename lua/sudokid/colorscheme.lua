@@ -221,5 +221,6 @@ ins_right {
 lualine.setup(config)
 
 -- Set color scheme
-vim.cmd("colorscheme material")
-vim.g.material_style = "darker"
+-- vim.cmd("colorscheme material")
+-- vim.g.material_style = "darker"
+require("kanagawa").load("wave")
