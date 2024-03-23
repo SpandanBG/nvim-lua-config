@@ -66,7 +66,10 @@ return require('packer').startup(function(use)
   use('nvim-telescope/telescope-dap.nvim')
   use('leoluz/nvim-dap-go')
   use('theHamsta/nvim-dap-virtual-text')
-  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+  use { "rcarriga/nvim-dap-ui", requires = {
+    { "mfussenegger/nvim-dap" }, -- Required
+    { "nvim-neotest/nvim-nio" }  -- Required
+  } }
   use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
   use {
     "microsoft/vscode-js-debug",
