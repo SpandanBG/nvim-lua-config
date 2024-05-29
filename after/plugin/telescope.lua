@@ -13,6 +13,9 @@ require('telescope').load_extension('lsp_handlers')
 -- Add DAP Handler
 require('telescope').load_extension('dap')
 
+-- Add Harpoon Support
+require("telescope").load_extension('harpoon')
+
 -- Find all Files
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 
@@ -24,7 +27,7 @@ vim.keymap.set('n', '<leader>pf', builtin.live_grep, {})
 
 -- Find keyword in all git file
 vim.keymap.set('n', '<leader>gf', function()
-  local git_dir = vim.api.nvim_exec("!git rev-parse --show-toplevel", false);
+  local git_dir = vim.api.nvim_exec2("!git rev-parse --show-toplevel", {});
   local opts = {
     cmd = git_dir
   };

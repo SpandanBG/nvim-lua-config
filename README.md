@@ -18,3 +18,15 @@ Make sure your node version setting is at `lts/hydrogen` when you run it
 
 ## LSP Problems
 1. For the error: `query error: invalid node type at position`, follow solution [here](https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position)
+
+## For Mac:
+The `<M-xyz>` where `M` is `Alt` doesn't work cause the terminal needs to be configured to handle `Option` as `Alt`.
+You can update the config of your terminal to do that.
+
+Example for `Alacritty`
+```toml
+# alacritty.toml
+
+[window]
+option_as_alt = "Both"
+```
