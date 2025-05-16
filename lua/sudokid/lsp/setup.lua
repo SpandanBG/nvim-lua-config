@@ -15,7 +15,7 @@ lsp.ensure_installed({
 	'rust_analyzer',
 	'gopls',
   'html',
-  'emmet_ls'
+  'htmx-lsp'
 })
 
 -- Setup Keybindngs for auto complete selection

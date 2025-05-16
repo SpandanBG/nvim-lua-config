@@ -1,10 +1,10 @@
-require("lspconfig").emmet_ls.setup({
-  filetypes = { "html", "css", "javascript", "typescriptreact", "javascriptreact" },
-  init_options = {
-    html = {
-      options = {
-        ["bem.enabled"] = true
-      }
-    }
-  }
+local lspconfig = require('lspconfig')
+
+-- plain HTML language server (vscode-html-language-server)
+lspconfig.html.setup({})
+
+-- HTMX attribute completions on top of HTML
+lspconfig.htmx.setup({
+  filetypes = { "html" }, -- attach whenever you open .html
+  single_file_support = true,
 })

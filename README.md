@@ -8,6 +8,7 @@
 ```
 
 - `sudo apt install lua5.3 fzf ripgrep fd`
+- Install `Rust` with `cargo` - [download](https://www.rust-lang.org/tools/install)
 
 - Vscode-Js-Debug:
 When you run `:PackerUpdate` to install the `microsoft/vscode-js-debug`, make sure the node version is `lts/hydrogen`
