@@ -30,6 +30,21 @@ require('dap-vscode-js').setup({
 
 local dap = require('dap')
 
+dap.adapters["pwa-node"] = {
+  type = "server",
+  host = "127.0.0.1",
+  port = "${port}",
+  executable = {
+    command = "node",
+    args = {
+      -- adapt the path to wherever Mason / your git clone put it
+      vim.fn.stdpath("data")
+      .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+      "${port}",
+    },
+  },
+}
+
 local js_based_languages = {
   "typescript",
   "javascript",
@@ -39,6 +54,35 @@ local js_based_languages = {
 
 for _, lang in ipairs(js_based_languages) do
   dap.configurations[lang] = {
+    -- Debug Vitest
+    {
+      name                     = "Debug current Vitest file",
+      type                     = "pwa-node",
+      request                  = "launch",
+      program                  = "${workspaceFolder}/node_modules/vitest/vitest.mjs",
+
+      -- ① keep Node in break-and-wait mode
+      runtimeExecutable        = "node",
+      runtimeArgs              = { "--inspect" },
+      stopOnEntry              = false,
+
+      -- ② Vitest CLI arguments
+      args                     = {
+        "run",
+        "--no-file-parallelism", -- ← replaces the old --threads false
+        "--test-timeout=0",      -- same effect, new syntax
+        "${file}",
+      },
+
+      cwd                      = "${workspaceFolder}",
+      autoAttachChildProcesses = true,
+      smartStep                = true,
+      console                  = "integratedTerminal",
+      internalConsoleOptions   = "neverOpen",
+      sourceMaps               = true,
+      skipFiles                = { "<node_internals>/**", "**/node_modules/**" },
+    },
+
     -- Debug Jest
     {
       name = 'Jest Test',
