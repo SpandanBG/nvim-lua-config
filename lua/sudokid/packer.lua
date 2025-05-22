@@ -66,6 +66,19 @@ local function theme(use)
   }
   -- use('marko-cerovac/material.nvim')
   use('rebelot/kanagawa.nvim')
+
+  -- Pretty Markdown
+  use({
+    'MeanderingProgrammer/markdown.nvim',
+    as = 'render-markdown',                             -- Only needed if you have another plugin named markdown.nvim
+    after = { 'nvim-treesitter' },
+    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    config = function()
+      require('render-markdown').setup({})
+    end,
+  })
 end
 
 local function utilities(use)
