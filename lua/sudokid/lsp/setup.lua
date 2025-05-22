@@ -14,7 +14,8 @@ lsp.ensure_installed({
 	'eslint',
 	'rust_analyzer',
 	'gopls',
-  'html'
+  'html',
+  'htmx-lsp'
 })
 
 -- Setup Keybindngs for auto complete selection

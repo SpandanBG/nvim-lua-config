@@ -13,8 +13,11 @@ require('telescope').load_extension('lsp_handlers')
 -- Add DAP Handler
 require('telescope').load_extension('dap')
 
+-- Add Live Grep Args Handler
+require('telescope').load_extension('live_grep_args')
+
 -- Add Harpoon Support
-require("telescope").load_extension('harpoon')
+-- require("telescope").load_extension('harpoon')
 
 -- Find all Files
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -23,7 +26,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
 
 -- Find keyword in all files (requires `ripgrep`)
-vim.keymap.set('n', '<leader>pf', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>pf', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {})
 
 -- Find keyword in all git file
 vim.keymap.set('n', '<leader>gf', function()

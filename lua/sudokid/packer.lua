@@ -8,8 +8,11 @@ local function essential(use)
   -- Fuzzy Finder for file finding
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
-    -- or                            , branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    -- or                           , branch = '0.1.x',
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-telescope/telescope-live-grep-args.nvim' },
+    }
   }
 
   -- Tree Sitter
@@ -51,11 +54,11 @@ local function essential(use)
     { "nvim-neotest/nvim-nio" }  -- Required
   } }
   use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
-  use {
-    "microsoft/vscode-js-debug",
-    opt = true,
-    run = "npm install && npx gulp vsDebugServerBundle && mv dist out"
-  }
+  -- use {
+  --   "microsoft/vscode-js-debug",
+  --   opt = true,
+  --   run = "npm ci --legacy-peer-deps  && npx gulp vsDebugServerBundle && rm -rf out && mv dist out"
+  -- }
 end
 
 local function theme(use)
