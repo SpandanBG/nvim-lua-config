@@ -32,7 +32,7 @@ Example for `Alacritty`
 option_as_alt = "Both"
 ```
 
-### Undo Tree Issue:
+## Undo Tree Issue:
 An issue of unable to save undo file might arise if the folder `~/.vim/undodir` does not belong to the current user.
 
 To fix this: `sudo chown -R <new_owner_username> <path_to_folder>`
