@@ -21,46 +21,46 @@ cmp.setup({
   }
 })
 
-local preferred = {
-  -- optional: list preferred servers per filetype
-  typescript = { 'ts_ls' },
-}
+-- local preferred = {
+--   -- optional: list preferred servers per filetype
+--   typescript = { 'ts_ls' },
+-- }
 
-local function rank(ft, name)
-  local p = preferred[ft]
-  if not p then return math.huge end
-  for i, n in ipairs(p) do if n == name then return i end end
-  return math.huge
-end
+-- local function rank(ft, name)
+--   local p = preferred[ft]
+--   if not p then return math.huge end
+--   for i, n in ipairs(p) do if n == name then return i end end
+--   return math.huge
+-- end
 
-local aug = vim.api.nvim_create_augroup('SingleLSP', {})
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = aug,
-  callback = function(ev)
-    local bufnr   = ev.buf
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
-    if #clients <= 1 then return end -- nothing to do
+-- local aug = vim.api.nvim_create_augroup('SingleLSP', {})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   group = aug,
+--   callback = function(ev)
+--     local bufnr   = ev.buf
+--     local clients = vim.lsp.get_clients({ bufnr = bufnr })
+--     if #clients <= 1 then return end -- nothing to do
 
-    -- Pick the keeper
-    local keep = clients[1]
-    for _, c in ipairs(clients) do
-      local better =
-          rank(vim.bo[bufnr].filetype, c.name) < rank(vim.bo[bufnr].filetype, keep.name) or
-          (rank(vim.bo[bufnr].filetype, c.name) == rank(vim.bo[bufnr].filetype, keep.name) and c.id < keep.id)
-      if better then keep = c end
-    end
+--     -- Pick the keeper
+--     local keep = clients[1]
+--     for _, c in ipairs(clients) do
+--       local better =
+--           rank(vim.bo[bufnr].filetype, c.name) < rank(vim.bo[bufnr].filetype, keep.name) or
+--           (rank(vim.bo[bufnr].filetype, c.name) == rank(vim.bo[bufnr].filetype, keep.name) and c.id < keep.id)
+--       if better then keep = c end
+--     end
 
-    -- Detach others after the current event loop tick
-    vim.schedule(function()
-      if not vim.api.nvim_buf_is_valid(bufnr) then return end
-      for _, c in ipairs(clients) do
-        if c.id ~= keep.id then
-          pcall(vim.lsp.buf_detach_client, bufnr, c.id)
-        end
-      end
-    end)
-  end,
-})
+--     -- Detach others after the current event loop tick
+--     vim.schedule(function()
+--       if not vim.api.nvim_buf_is_valid(bufnr) then return end
+--       for _, c in ipairs(clients) do
+--         if c.id ~= keep.id then
+--           pcall(vim.lsp.buf_detach_client, bufnr, c.id)
+--         end
+--       end
+--     end)
+--   end,
+-- })
 
 lsp.setup()
 
