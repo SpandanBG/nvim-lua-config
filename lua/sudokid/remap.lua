@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- Add "<leader>e" to open file exporler
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Add keymaps to control tabs
 vim.keymap.set("n", "<C-j>", vim.cmd.tabprevious)
@@ -59,4 +59,3 @@ vim.keymap.set('n', '<leader>oq', ":copen<CR>")
 vim.keymap.set('n', '<leader>cq', ":cexpr []<CR>")
 vim.keymap.set('n', ']q', ":cnext<CR>")
 vim.keymap.set('n', '[q', ":cprevious<CR>")
-

@@ -59,6 +59,22 @@ local function essential(use)
   --   opt = true,
   --   run = "npm ci --legacy-peer-deps  && npx gulp vsDebugServerBundle && rm -rf out && mv dist out"
   -- }
+
+  -- OIL for file management
+  use({
+    "stevearc/oil.nvim",
+    config = function()
+      require("oil").setup()
+    end,
+  })
+
+  -- File Icons
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons',   -- optional, for file icons
+    },
+  }
 end
 
 local function theme(use)

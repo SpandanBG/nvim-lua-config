@@ -10,6 +10,9 @@ local builtin = require('telescope.builtin')
 -- Add Telescope LSP Handlers
 require('telescope').load_extension('lsp_handlers')
 
+-- Add mapping for lsp 
+vim.keymap.set('n', 'gr', builtin.lsp_references, {})
+
 -- Add DAP Handler
 require('telescope').load_extension('dap')
 
