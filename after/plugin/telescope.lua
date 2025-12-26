@@ -44,3 +44,6 @@ end)
 vim.keymap.set('n', "<leader>cf", function()
   builtin.live_grep({ search_dirs = { "%:p" } })
 end)
+
+-- Set `goto defination` to Telescope
+vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { desc = 'Telescope LSP definitions' })
