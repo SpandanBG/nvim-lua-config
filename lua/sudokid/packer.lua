@@ -72,7 +72,7 @@ local function essential(use)
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
-      'nvim-tree/nvim-web-devicons',   -- optional, for file icons
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
   }
 end
@@ -80,7 +80,7 @@ end
 local function theme(use)
   -- Color Scheme
   use {
-    'nvim-lualine/lualine.nvim',
+    'nvim-lualine/lualine.nvim', -- lualine for status-bar customization
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
   -- use('marko-cerovac/material.nvim')
