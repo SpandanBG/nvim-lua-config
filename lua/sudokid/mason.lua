@@ -2,8 +2,9 @@
 -- cpptools
 -- codelldb
 
+require("mason").setup()
 
--- Ensure the following are installed with Mason
-require("mason-lspconfig").setup {
-    ensure_installed = { "gopls", "rust_analyzer" },
-}
+require("mason-lspconfig").setup({
+    automatic_enable = true,
+    ensure_installed = { "ts_ls", "rust_analyzer", "gopls", "lua_ls" },
+})

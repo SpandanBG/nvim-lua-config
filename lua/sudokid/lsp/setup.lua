@@ -1,72 +1,62 @@
-local lsp = require('lsp-zero').preset({})
+-- Keymaps on LSP attach (replaces lsp-zero default_keymaps)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local buf = ev.buf
+    local map = function(m, lhs, rhs)
+      vim.keymap.set(m, lhs, rhs, { buffer = buf })
+    end
 
-lsp.on_attach(function(_, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp.default_keymaps({ buffer = bufnr })
-end)
+    map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+    map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+    map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+    map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+    map('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+    map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    -- map('n', '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+    -- map('x', '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+    -- map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    -- map('x', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+  end,
+})
 
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+-- Configure lua language server for neovim
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      telemetry = { enable = false },
+      runtime = {
+        version = 'LuaJIT',
+        path = (function()
+          local p = vim.split(package.path, ';')
+          table.insert(p, 'lua/?.lua')
+          table.insert(p, 'lua/?/init.lua')
+          return p
+        end)(),
+      },
+      diagnostics = { globals = { 'vim' } },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.fn.expand('$VIMRUNTIME/lua'),
+          vim.fn.stdpath('config') .. '/lua',
+        },
+      },
+    },
+  },
+})
+vim.lsp.enable('lua_ls')
 
--- Setup Keybindngs for auto complete selection
+-- Setup keybindings for auto complete selection
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<CR>']    = cmp.mapping.confirm({ select = false }),
     ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
-    ['<Tab>'] = cmp_action.tab_complete(),
+    ['<Tab>']   = cmp_action.tab_complete(),
   }
-})
-
--- local preferred = {
---   -- optional: list preferred servers per filetype
---   typescript = { 'ts_ls' },
--- }
-
--- local function rank(ft, name)
---   local p = preferred[ft]
---   if not p then return math.huge end
---   for i, n in ipairs(p) do if n == name then return i end end
---   return math.huge
--- end
-
--- local aug = vim.api.nvim_create_augroup('SingleLSP', {})
--- vim.api.nvim_create_autocmd('LspAttach', {
---   group = aug,
---   callback = function(ev)
---     local bufnr   = ev.buf
---     local clients = vim.lsp.get_clients({ bufnr = bufnr })
---     if #clients <= 1 then return end -- nothing to do
-
---     -- Pick the keeper
---     local keep = clients[1]
---     for _, c in ipairs(clients) do
---       local better =
---           rank(vim.bo[bufnr].filetype, c.name) < rank(vim.bo[bufnr].filetype, keep.name) or
---           (rank(vim.bo[bufnr].filetype, c.name) == rank(vim.bo[bufnr].filetype, keep.name) and c.id < keep.id)
---       if better then keep = c end
---     end
-
---     -- Detach others after the current event loop tick
---     vim.schedule(function()
---       if not vim.api.nvim_buf_is_valid(bufnr) then return end
---       for _, c in ipairs(clients) do
---         if c.id ~= keep.id then
---           pcall(vim.lsp.buf_detach_client, bufnr, c.id)
---         end
---       end
---     end)
---   end,
--- })
-
-lsp.setup()
-
-lsp.ensure_installed({
-  'ts_ls',
-  'rust_analyzer',
-  'gopls',
-  'htmx-lsp'
 })
