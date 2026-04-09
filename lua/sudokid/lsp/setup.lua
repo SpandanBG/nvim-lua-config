@@ -51,12 +51,20 @@ vim.lsp.enable('lua_ls')
 
 -- Setup keybindings for auto complete selection
 local cmp = require('cmp')
-local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
+  sources = {
+    { name = 'nvim_lsp' },
+  },
   mapping = {
     ['<CR>']    = cmp.mapping.confirm({ select = false }),
-    ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
-    ['<Tab>']   = cmp_action.tab_complete(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+    ['<Tab>']   = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   }
 })
