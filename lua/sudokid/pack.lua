@@ -20,11 +20,12 @@ local function essential()
     'https://github.com/nvim-telescope/telescope.nvim',
   })
 
-  -- Tree Sitter
+  -- Tree Sitter (fork at neovim-treesitter org — original was archived April 2026)
+  -- playground dropped: use built-in :InspectTree instead
   vim.pack.add({
-    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/neovim-treesitter/treesitter-parser-registry',
+    'https://github.com/neovim-treesitter/nvim-treesitter',
     'https://github.com/nvim-treesitter/nvim-treesitter-context',
-    'https://github.com/nvim-treesitter/playground',
   })
 
   -- Git
