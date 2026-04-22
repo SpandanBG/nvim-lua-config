@@ -1,7 +1,7 @@
 require("sudokid.set")
+require("sudokid.pack")       -- must come before mason/lsp (plugins need to be on rtp)
 require("sudokid.mason")
 require("sudokid.lsp")
-require("sudokid.packer")
 require("sudokid.remap")
 require("sudokid.colorscheme")
 require("sudokid.quick_esc")

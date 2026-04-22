@@ -21,7 +21,7 @@ local function run_build(cmd)
     error("no executables in zig-out/bin")
   end
   table.sort(list, function(a, b)
-    return vim.loop.fs_stat(a).mtime.sec > vim.loop.fs_stat(b).mtime.sec
+    return vim.uv.fs_stat(a).mtime.sec > vim.uv.fs_stat(b).mtime.sec
   end)
   return list[1] -- newest binary
 end

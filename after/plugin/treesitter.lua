@@ -21,9 +21,10 @@ require 'nvim-treesitter.configs'.setup {
   },
 }
 
--- Enable fold and unfold using treesitter
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+-- Enable fold and unfold using treesitter (native, Neovim 0.10+)
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
 -- quick fix for treesitter fold cause broken by telescope
 vim.api.nvim_create_autocmd('BufRead', {
   callback = function()

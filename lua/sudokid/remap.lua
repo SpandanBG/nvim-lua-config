@@ -51,8 +51,8 @@ vim.keymap.set("n", "<leader>cp", ':let @+ = expand("%")<CR>')
 vim.keymap.set("n", "<C-s>", ':w<CR>')
 
 -- Jump to error
-vim.keymap.set('n', ']e', vim.diagnostic.goto_next, { noremap = true, silent = true })
-vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, { noremap = true, silent = true })
+vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = 1 }) end, { noremap = true, silent = true })
+vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = -1 }) end, { noremap = true, silent = true })
 
 -- Quickfix
 vim.keymap.set('n', '<leader>oq', ":copen<CR>")
