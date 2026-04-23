@@ -1,7 +1,28 @@
+-- Add multi-selected (or current) Telescope entries to Harpoon
+-- Usage: <Tab> to mark files, then <C-h> to add all to Harpoon
+local function add_to_harpoon(prompt_bufnr)
+  local action_state = require('telescope.actions.state')
+  local actions = require('telescope.actions')
+  local picker = action_state.get_current_picker(prompt_bufnr)
+  local selections = picker:get_multi_selection()
+  if #selections == 0 then
+    selections = { action_state.get_selected_entry() }
+  end
+  actions.close(prompt_bufnr)
+  local mark = require('harpoon.mark')
+  for _, entry in ipairs(selections) do
+    mark.add_file(entry.path or entry.filename or entry.value)
+  end
+end
+
 -- Setup Telescope
 require('telescope').setup {
   defaults = {
     path_display = { shorten = 4 },
+    mappings = {
+      i = { ['<C-h>'] = add_to_harpoon },
+      n = { ['<C-h>'] = add_to_harpoon },
+    },
   }
 }
 
