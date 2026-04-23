@@ -9,9 +9,10 @@ local function add_to_harpoon(prompt_bufnr)
     selections = { action_state.get_selected_entry() }
   end
   actions.close(prompt_bufnr)
-  local mark = require('harpoon.mark')
+  local harpoon = require('harpoon')
   for _, entry in ipairs(selections) do
-    mark.add_file(entry.path or entry.filename or entry.value)
+    local filepath = entry.path or entry.filename or entry.value
+    harpoon:list():add({ value = filepath, context = { row = 1, col = 0 } })
   end
 end
 
@@ -39,9 +40,6 @@ require('telescope').load_extension('dap')
 
 -- Add Live Grep Args Handler
 require('telescope').load_extension('live_grep_args')
-
--- Add Harpoon Support
--- require("telescope").load_extension('harpoon')
 
 -- Find all Files
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

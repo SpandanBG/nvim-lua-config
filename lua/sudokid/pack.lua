@@ -28,11 +28,12 @@ local function essential()
     'https://github.com/nvim-treesitter/nvim-treesitter-context',
   })
 
-  -- Git
+  -- Git (gitsigns replaces vim-gitgutter — no BufFilePost conflict with harpoon2)
   vim.pack.add({
-    'https://github.com/airblade/vim-gitgutter',
+    'https://github.com/lewis6991/gitsigns.nvim',
     'https://github.com/tpope/vim-fugitive',
   })
+  require('gitsigns').setup()
 
   -- LSP
   vim.pack.add({
@@ -102,7 +103,7 @@ local function utilities()
 
   -- Harpoon
   vim.pack.add({
-    'https://github.com/ThePrimeagen/harpoon',
+    { src = 'https://github.com/ThePrimeagen/harpoon', version = 'harpoon2' },
   })
 
   -- Vim Commentary: Comment and Uncomment lines / selections
