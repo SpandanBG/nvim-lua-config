@@ -8,7 +8,7 @@ This is a personal Neovim configuration written in Lua, maintained under the nam
 - `lua/sudokid/init.lua` — loads all submodules in order
 - `lua/sudokid/set.lua` — vim options (tabs, search, UI)
 - `lua/sudokid/remap.lua` — global keymaps
-- `lua/sudokid/packer.lua` — plugin declarations via packer.nvim
+- `lua/sudokid/pack.lua` — plugin declarations via vim.pack (Neovim 0.12 built-in)
 - `lua/sudokid/mason.lua` — Mason LSP installer setup
 - `lua/sudokid/lsp/` — LSP configuration (setup.lua, htmx.lua)
 - `lua/sudokid/dap/` — Debug Adapter Protocol configs (go, rust, zig, javascript, dap_ui, remap)
@@ -21,19 +21,21 @@ This is a personal Neovim configuration written in Lua, maintained under the nam
 
 ## Plugin Manager
 
-Uses **packer.nvim** (`wbthomason/packer.nvim`).
+Uses **vim.pack** (Neovim 0.12 built-in). Plugins declared in `lua/sudokid/pack.lua`.
+- Update all plugins: `:lua vim.pack.update()`
+- Lockfile: `nvim-pack-lock.json` in config root
 
 ## Key Plugins
 
-- **Telescope** — fuzzy finder, file/grep search, LSP integration
-- **Treesitter** — syntax highlighting and context
-- **LSP** — via `nvim-lspconfig` + `mason.nvim` + `lsp-zero` (v2.x) + `nvim-cmp`
+- **Telescope** — fuzzy finder, file/grep search, LSP integration; custom `<C-h>` action adds selections to Harpoon
+- **Treesitter** — uses `neovim-treesitter/nvim-treesitter` fork (original archived April 2026); parsers managed via `:TSInstall` / `:TSUpdate`
+- **LSP** — via `nvim-lspconfig` + `mason.nvim` + `mason-lspconfig.nvim` + `nvim-cmp`; uses native `vim.lsp.config` / `vim.lsp.enable` API (no lsp-zero)
 - **DAP** — nvim-dap with adapters for Go, Rust, Zig, JavaScript
-- **Harpoon** — quick file switching
+- **Harpoon2** — quick file switching (`harpoon2` branch); UI opens in Telescope picker
 - **Oil.nvim** — file manager
 - **Kanagawa** — color scheme
-- **vim-fugitive** + **vim-gitgutter** — Git integration
-- **mini.nvim** — misc utilities
+- **vim-fugitive** + **gitsigns.nvim** — Git integration (gitsigns replaces vim-gitgutter)
+- **mini.nvim** — misc utilities (pairs, surround, indentscope)
 - **Taboo** — named tabs
 
 ## Key Keymaps
@@ -43,6 +45,10 @@ Uses **packer.nvim** (`wbthomason/packer.nvim`).
 - `<leader>ff` — Telescope find files
 - `<leader>fg` — Telescope git files
 - `<leader>pf` — live grep (all files)
+- `<C-h>` — (inside Telescope) add selected file(s) to Harpoon
+- `<F1>` — add current file to Harpoon
+- `<leader>hh` — open Harpoon list in Telescope
+- `<leader>[` / `<leader>]` — prev / next Harpoon file
 - `<C-j>` / `<C-k>` — previous / next tab
 - `<C-f>` — LSP format
 - `<C-s>` — save file
@@ -53,6 +59,8 @@ Uses **packer.nvim** (`wbthomason/packer.nvim`).
 - `]q` / `[q` — next / prev quickfix
 - `<leader>T` — open terminal in vertical split
 - `<leader>y` — yank to system clipboard (visual)
+- `<F3>`–`<F11>` — DAP controls (breakpoint, continue, step, etc.)
+- `<leader>=` — toggle DAP UI
 
 ## Conventions
 
