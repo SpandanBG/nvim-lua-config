@@ -17,6 +17,7 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 - **Rust** — install via [rustup](https://www.rust-lang.org/tools/install)
 - **Zig** — install via [ziglang.org](https://ziglang.org/download)
 - **Go** — install via [go.dev](https://go.dev/dl)
+- **tree-sitter CLI** — required to compile treesitter parsers: `cargo install tree-sitter-cli` (note: `brew install tree-sitter` only installs the library, not the CLI)
 - **codelldb** and **cpptools** — install via `:Mason` (required for Rust/Zig DAP)
 - **js-debug-adapter** — install via `:Mason` (required for JavaScript/TypeScript DAP)
 - Undo history directory: `mkdir -p ~/.vim/undodir`
