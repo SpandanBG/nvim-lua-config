@@ -167,6 +167,33 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 - The adapter is served on port `9229` via Node
 - Debug configs available: Vitest, Jest, Launch file, Attach to process, Chrome
 
+#### Debugging in Chrome on Android Emulator
+
+**Prerequisites:**
+- Android emulator running with ADB enabled (`adb devices` should show the emulator)
+- Chrome open on the emulator with the target page loaded
+- `adb` on `$PATH`
+
+**Verify Chrome's DevTools socket is available:**
+```bash
+adb shell cat /proc/net/unix | grep devtools
+# Should show: @chrome_devtools_remote
+```
+
+**Test the ADB port forward manually:**
+```bash
+adb forward tcp:9222 localabstract:chrome_devtools_remote
+adb forward --list   # should show tcp:9222 -> localabstract:chrome_devtools_remote
+curl http://localhost:9222/json  # should return JSON list of open Chrome tabs
+```
+
+**Start debugging:**
+1. Open your Next.js project in nvim
+2. Set a breakpoint (`<F3>`) in a `.tsx` / `.ts` file
+3. Press `<F6>` (Continue) → select **"Attach to Chrome (Android Emulator)"**
+4. The config runs `adb forward` automatically and attaches to port 9222
+5. Interact with the app in the emulator — execution pauses at the breakpoint
+
 ### LSP (auto-installed via Mason)
 - `ts_ls` — TypeScript/JavaScript
 - `rust_analyzer` — Rust

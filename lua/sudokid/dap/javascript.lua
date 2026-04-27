@@ -30,20 +30,28 @@ require('dap-vscode-js').setup({
 
 local dap = require('dap')
 
-dap.adapters["pwa-node"] = {
-  type = "server",
-  host = "127.0.0.1",
-  port = "9229",
-  executable = {
-    command = "node",
-    args = {
-      -- adapt the path to wherever Mason / your git clone put it
-      vim.fn.stdpath("data")
-      .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
-      "${port}",
+local js_debug_server = vim.fn.stdpath("data")
+  .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+
+local function js_debug_adapter(cb)
+  local tcp = vim.uv.new_tcp()
+  tcp:bind("127.0.0.1", 0)
+  local port = tcp:getsockname().port
+  tcp:shutdown()
+  tcp:close()
+  cb({
+    type = "server",
+    host = "::1",
+    port = port,
+    executable = {
+      command = "node",
+      args = { js_debug_server, tostring(port) },
     },
-  },
-}
+  })
+end
+
+dap.adapters["pwa-node"] = js_debug_adapter
+dap.adapters["pwa-chrome"] = js_debug_adapter
 
 local js_based_languages = {
   "typescript",
@@ -139,6 +147,29 @@ for _, lang in ipairs(js_based_languages) do
       protocol = "inspector",
       sourceMaps = true,
       userDataDir = false,
+    },
+
+    -- Debug web app in Chrome on Android Emulator (via ADB port forward)
+    {
+      name = "Attach to Chrome (Android Emulator)",
+      type = "pwa-chrome",
+      request = "attach",
+      port = function()
+        local result = vim.fn.system("adb forward tcp:9222 localabstract:chrome_devtools_remote")
+        vim.notify("adb forward: " .. vim.trim(result), vim.log.levels.INFO)
+        return 9222
+      end,
+      address = "localhost",
+      webRoot = "${workspaceFolder}",
+      sourceMaps = true,
+      skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+      urlFilter = "*",
+      sourceMapPathOverrides = {
+        ["/*"]               = "${webRoot}/*",
+        ["webpack://_N_E/*"] = "${webRoot}/*",
+        ["webpack:///*"]     = "${webRoot}/*",
+        ["webpack:///./~/*"] = "${webRoot}/node_modules/*",
+      },
     },
 
     -- Divider for the launch.json derived configs
