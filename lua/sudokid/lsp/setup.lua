@@ -18,8 +18,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
     -- map('n', '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
     -- map('x', '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
-    -- map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    -- map('x', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    map('x', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+  end,
+})
+
+-- Auto-apply gopls source.fixAll suggestions on save (rangeint, etc.)
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.go',
+  callback = function()
+    vim.lsp.buf.code_action({
+      context = { only = { 'source.fixAll' } },
+      apply = true,
+    })
   end,
 })
 
