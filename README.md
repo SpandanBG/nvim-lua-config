@@ -34,7 +34,7 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 |-----|------|--------|
 | `<leader>e` | n | Open file manager (Oil) |
 | `<C-s>` | n | Save file |
-| `<C-f>` | n | LSP format |
+| `<C-f>` | n/v | Format via conform.nvim (Prettier/stylua/gofmt/rustfmt/ruff, LSP fallback) |
 | `<leader>T` | n | Open terminal in vertical split |
 | `<leader><ESC>` | t | Exit terminal |
 | `<ESC>` | t | Exit terminal mode (keep window) |
@@ -111,7 +111,7 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 | `n` / `N` | n | Search next/prev (keeps result centred) |
 | `<leader>r` | n | Rename word under cursor (project-wide, with confirm) |
 | `<leader>cp` | n | Copy relative file path to clipboard |
-| `<C-f>` | n | Format file via LSP |
+| `<C-f>` | n/v | Format file/selection via conform.nvim |
 | `Q` | n | Disabled (prevents accidental Ex mode) |
 | `gcc` | n | Toggle comment on line |
 | `gc` | v | Toggle comment on selection |

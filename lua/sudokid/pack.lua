@@ -42,6 +42,11 @@ local function essential()
     'https://github.com/williamboman/mason-lspconfig.nvim',
   })
 
+  -- Formatter (prettier, stylua, etc. — reads project config like .prettierrc)
+  vim.pack.add({
+    'https://github.com/stevearc/conform.nvim',
+  })
+
   -- Autocompletion
   vim.pack.add({
     'https://github.com/hrsh7th/nvim-cmp',

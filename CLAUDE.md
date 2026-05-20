@@ -30,6 +30,7 @@ Uses **vim.pack** (Neovim 0.12 built-in). Plugins declared in `lua/sudokid/pack.
 - **Telescope** — fuzzy finder, file/grep search, LSP integration; custom `<C-h>` action adds selections to Harpoon
 - **Treesitter** — uses `neovim-treesitter/nvim-treesitter` fork (original archived April 2026); parsers managed via `:TSInstall` / `:TSUpdate`
 - **LSP** — via `nvim-lspconfig` + `mason.nvim` + `mason-lspconfig.nvim` + `nvim-cmp`; uses native `vim.lsp.config` / `vim.lsp.enable` API (no lsp-zero)
+- **conform.nvim** — formatter dispatcher; runs Prettier (project-local via `node_modules/.bin`), stylua, gofmt/goimports, rustfmt, ruff. Falls back to LSP if no formatter is configured for the filetype
 - **DAP** — nvim-dap with adapters for Go, Rust, Zig, JavaScript
 - **Harpoon2** — quick file switching (`harpoon2` branch); UI opens in Telescope picker
 - **Oil.nvim** — file manager
@@ -50,7 +51,7 @@ Uses **vim.pack** (Neovim 0.12 built-in). Plugins declared in `lua/sudokid/pack.
 - `<leader>hh` — open Harpoon list in Telescope
 - `<leader>[` / `<leader>]` — prev / next Harpoon file
 - `<C-j>` / `<C-k>` — previous / next tab
-- `<C-f>` — LSP format
+- `<C-f>` — format buffer/selection via conform.nvim (LSP fallback)
 - `<C-s>` — save file
 - `<leader>r` — rename word under cursor (sed-style)
 - `gd` — go to definition (Telescope LSP)

@@ -31,9 +31,14 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 -- Remove the annoying `Q` -_-
 vim.keymap.set("n", "Q", "<nop>")
 
--- Format code
-vim.keymap.set("n", "<C-f>", function()
-  vim.lsp.buf.format()
+-- Format code (conform.nvim → prettier/stylua/etc., falls back to LSP)
+vim.keymap.set({ "n", "v" }, "<C-f>", function()
+  local ok, conform = pcall(require, "conform")
+  if ok then
+    conform.format({ async = false, lsp_fallback = true, timeout_ms = 3000 })
+  else
+    vim.lsp.buf.format()
+  end
 end)
 
 -- Rename current word
