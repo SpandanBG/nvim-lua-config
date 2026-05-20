@@ -38,6 +38,8 @@ Uses **vim.pack** (Neovim 0.12 built-in). Plugins declared in `lua/sudokid/pack.
 - **vim-fugitive** + **gitsigns.nvim** — Git integration (gitsigns replaces vim-gitgutter)
 - **mini.nvim** — misc utilities (pairs, surround, indentscope)
 - **Taboo** — named tabs
+- **persistence.nvim** — auto-saves on `VimLeavePre`; auto-restores when nvim is launched with no file args (bare `nvim` in a dir)
+- **nvim-ufo** — fold ranges from LSP (fallback: treesitter); `foldlevelstart`/`foldlevel`/`foldenable` set in `after/plugin/ufo.lua`. Treesitter's own foldexpr is intentionally disabled to avoid clobbering ufo
 
 ## Key Keymaps
 

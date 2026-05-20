@@ -59,6 +59,11 @@ local function essential()
     'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim',
   })
 
+  -- Async primitive (required by nvim-ufo)
+  vim.pack.add({
+    'https://github.com/kevinhwang91/promise-async',
+  })
+
   -- DAPs
   vim.pack.add({
     'https://github.com/mfussenegger/nvim-dap',
@@ -121,6 +126,16 @@ local function utilities()
   -- MINI tools
   vim.pack.add({
     'https://github.com/echasnovski/mini.nvim',
+  })
+
+  -- Session persistence (auto-save/restore per cwd)
+  vim.pack.add({
+    'https://github.com/folke/persistence.nvim',
+  })
+
+  -- Stable folds: LSP/treesitter-driven, doesn't snap shut on edits/cursor moves
+  vim.pack.add({
+    'https://github.com/kevinhwang91/nvim-ufo',
   })
 end
 

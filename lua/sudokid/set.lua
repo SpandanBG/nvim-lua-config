@@ -32,6 +32,12 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.inccommand = "split"        -- Live preview of :s substitutions in a split
 
 -- Map leader key
 vim.g.mapleader = " "
+
+-- Briefly highlight yanked text (visual confirmation of what got copied)
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function() vim.hl.on_yank({ timeout = 150 }) end,
+})

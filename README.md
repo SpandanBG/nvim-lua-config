@@ -142,6 +142,9 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 | `<leader>u` | n | Toggle undo tree |
 | `:Cppath` | cmd | Copy absolute file path to clipboard |
 | `:InspectTree` | cmd | Show treesitter syntax tree (built-in, replaces playground) |
+| `:FormatDisable` | cmd | Disable format-on-save for the current buffer |
+| `:FormatDisable!` | cmd | Disable format-on-save globally |
+| `:FormatEnable` | cmd | Re-enable format-on-save |
 
 ---
 
@@ -231,6 +234,71 @@ To install parsers for new languages:
 ```
 :TSInstall <lang>
 ```
+
+---
+
+## Quality of life
+
+### Editor tweaks
+
+- **Live substitute preview** — `:s/old/new/` opens a split showing matches as you type (`inccommand=split`).
+- **Yank highlight** — flashes the yanked region briefly so you see what got copied (`TextYankPost` autocmd → `vim.hl.on_yank`).
+
+### Formatting (conform.nvim)
+
+`<C-f>` (normal/visual) formats via the right tool per filetype:
+
+| Filetype | Formatter |
+|---|---|
+| JS/TS/JSON/YAML/CSS/HTML/Markdown/GraphQL | **Prettier** (uses project-local `node_modules/.bin/prettier` with `.prettierrc`) |
+| Lua | stylua |
+| Go | goimports + gofmt |
+| Rust | rustfmt |
+| Python | ruff format |
+| (other) | LSP fallback |
+
+**Format on save** is enabled by default. Toggle with `:FormatDisable` (buffer), `:FormatDisable!` (global), `:FormatEnable`.
+
+### Sessions (persistence.nvim)
+
+- Auto-saves a session per cwd on `VimLeavePre`. Triggers on `:qa`, `:qa!`, `ZZ`, `:wq`. **Does not save** on `<C-z>` suspend (process paused, not exited) or `:cq`.
+- Auto-restores the last session when nvim is launched with **no file args** (bare `nvim` in a project dir). `nvim file.txt` or `nvim .` opens just that argument — no restore.
+
+### Statusline LSP progress (lualine)
+
+The right side of the statusline shows the LSP client name plus a live `xx%` indicator (in orange) sourced from `vim.lsp.status()`. Redraws on every `LspProgress` event so e.g. `rust_analyzer` indexing progress updates in real time.
+
+### Folding (nvim-ufo)
+
+- Replaces the flaky `foldexpr=vim.treesitter.foldexpr()` real-time recompute with ufo's async + cached folds.
+- Provider chain: **treesitter** (`folds.scm` queries per language) → **indent** fallback. `indent` never throws, so no `UfoFallbackException` can escape on filetypes without a TS parser.
+- Fold gutter shows `▾` (open) / `▸` (closed) chevrons next to line numbers (`foldcolumn=1`).
+- Folded lines are tinted **plum** (`#3D2D5C`); `fg` is intentionally unset so ufo's extmark-rendered syntax highlighting on the folded line shows through.
+- `foldlevel = foldlevelstart = 99` — folds stay open across new windows and buffers; nothing auto-closes on edit or cursor move.
+
+### `folded_dirty` — git-aware fold tint
+
+When a gitsigns hunk falls inside a closed fold, the fold's visible line is tinted **green** (`#2D4F36`) instead of the default plum. Surfaces "there are uncommitted changes inside this fold" without adding signs to the gutter.
+
+**How it works** (`after/plugin/folded_dirty.lua`):
+
+1. Walks `require('gitsigns').get_hunks(bufnr)`, maps each hunk line to its containing fold via `vim.fn.foldclosed()`.
+2. Places a buffer extmark with `line_hl_group = 'FoldedDirty'` on each affected fold's first line. The extmark's `line_hl_group` wins over `Folded`'s bg per-line.
+3. Re-runs on `BufEnter`, `BufWinEnter`, `TextChanged`, `CursorHold`, `CursorHoldI`, and `User GitSignsUpdate`. A 50 ms debounce collapses bursts (e.g. continuous typing).
+
+**Latency note** — vim has no autocmd for fold open/close, so `zc`/`zo` won't update the tint instantly. It catches up on the next `CursorHold` (~100 ms idle, per `updatetime=100`) or any subsequent edit/save.
+
+**Performance** (5000-line buffer, 167 closed folds, 50 hunks × 3 lines each; 100 trials):
+
+| Scenario | Avg per refresh |
+|---|---|
+| 50 hunks, 167 folds | 0.053 ms |
+| No hunks (early return) | < 0.001 ms |
+| `nvim_buf_clear_namespace` baseline | < 0.001 ms |
+
+At worst (continuous typing), the 50 ms debounce caps refreshes at 20/sec → **~1 ms of CPU per second** on the test buffer. Sub-microsecond on typical config-sized files.
+
+Cost scales with **hunk size × hunk count**, not buffer size — we only call `foldclosed()` on lines that are actually part of a hunk, and `seen[]` de-dupes folds so the extmark count equals affected-fold count, not hunk count.
 
 ---
 

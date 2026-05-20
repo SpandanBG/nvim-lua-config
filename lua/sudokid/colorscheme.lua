@@ -176,6 +176,17 @@ ins_right {
   color = { fg = '#ffffff', gui = 'bold' },
 }
 
+ins_right {
+  -- LSP work progress as `xx%` (empty when idle); parsed from vim.lsp.status()
+  function()
+    local s = vim.lsp.status()
+    if s == '' then return '' end
+    local pct = s:match('(%d+)%%')
+    return pct and (pct .. '%') or ''
+  end,
+  color = { fg = colors.orange, gui = 'bold' },
+}
+
 -- Add components to right sections
 ins_right {
   'o:encoding',       -- option component same as &encoding in viml
@@ -219,6 +230,12 @@ ins_right {
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)
+
+-- Repaint statusline live as LSP progress events fire
+vim.api.nvim_create_autocmd('LspProgress', {
+  group = vim.api.nvim_create_augroup('lualine_lsp_progress', { clear = true }),
+  callback = function() vim.cmd.redrawstatus() end,
+})
 
 -- Set color scheme
 -- vim.cmd("colorscheme material")
