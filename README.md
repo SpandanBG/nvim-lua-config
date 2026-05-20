@@ -126,6 +126,13 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 | `]q` | n | Next quickfix item |
 | `[q` | n | Previous quickfix item |
 
+### Git (gitsigns)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `]c` | n | Next git hunk in buffer (falls back to vim's diff-mode `]c` when in diff) |
+| `[c` | n | Previous git hunk in buffer (falls back to vim's diff-mode `[c` when in diff) |
+
 ### Surround (mini.surround)
 
 | Key | Action |
