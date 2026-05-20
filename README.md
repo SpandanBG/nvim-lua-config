@@ -72,6 +72,7 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 | `gD` | n | Go to declaration |
 | `gl` | n | Open diagnostics float |
 | `<F2>` | n | Rename symbol |
+| `<leader>ca` | n/x | LSP code action (apply quickfix / refactor / source action under cursor or selection) |
 | `]e` | n | Next diagnostic |
 | `[e` | n | Previous diagnostic |
 
@@ -145,6 +146,7 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 | `:FormatDisable` | cmd | Disable format-on-save for the current buffer |
 | `:FormatDisable!` | cmd | Disable format-on-save globally |
 | `:FormatEnable` | cmd | Re-enable format-on-save |
+| `:FixAll` | cmd | Apply LSP `source.fixAll` code action (gopls rangeint, ruff fix-all, etc.) |
 
 ---
 
@@ -164,6 +166,7 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 ### Go
 - Install `delve` via `:Mason` (or `go install github.com/go-delve/delve/cmd/dlv@latest`)
 - `<F8>` runs the Go test function under the cursor
+- **Manual fix-all**: run `:FixAll` to apply gopls' `source.fixAll` code action (handles e.g. `rangeint` upgrades, unused imports). The command is generic — works for any LSP attached to the current buffer, not just gopls.
 
 ### JavaScript / TypeScript
 - Install `js-debug-adapter` via `:Mason`

@@ -23,16 +23,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- Auto-apply gopls source.fixAll suggestions on save (rangeint, etc.)
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.go',
-  callback = function()
-    vim.lsp.buf.code_action({
-      context = { only = { 'source.fixAll' } },
-      apply = true,
-    })
-  end,
-})
+-- Apply LSP source.fixAll on demand (e.g. gopls' rangeint upgrade, unused
+-- imports, ruff fix-all). Runs against whichever LSP is attached to the
+-- current buffer. Invoked manually via :FixAll — no auto-save trigger.
+vim.api.nvim_create_user_command('FixAll', function()
+  vim.lsp.buf.code_action({
+    context = { only = { 'source.fixAll' } },
+    apply = true,
+  })
+end, { desc = 'Apply LSP source.fixAll code action on the current buffer' })
 
 -- Configure lua language server for neovim
 vim.lsp.config('lua_ls', {
