@@ -40,6 +40,7 @@ Uses **vim.pack** (Neovim 0.12 built-in). Plugins declared in `lua/sudokid/pack.
 - **Taboo** — named tabs
 - **persistence.nvim** — auto-saves on `VimLeavePre`; auto-restores when nvim is launched with no file args (bare `nvim` in a dir)
 - **nvim-ufo** — fold ranges from LSP (fallback: treesitter); `foldlevelstart`/`foldlevel`/`foldenable` set in `after/plugin/ufo.lua`. Treesitter's own foldexpr is intentionally disabled to avoid clobbering ufo
+- **render-markdown.nvim** — in-buffer markdown rendering via treesitter + extmarks (headings, bold, list markers, code blocks). Buffers open raw; `<leader>mr` toggles per-buffer. `render_modes = true` so styles stay applied in all vim modes
 
 ## Key Keymaps
 
@@ -64,6 +65,7 @@ Uses **vim.pack** (Neovim 0.12 built-in). Plugins declared in `lua/sudokid/pack.
 - `<leader>y` — yank to system clipboard (visual)
 - `<F3>`–`<F11>` — DAP controls (breakpoint, continue, step, etc.)
 - `<leader>=` — toggle DAP UI
+- `<leader>mr` — (markdown buffers) toggle render-markdown read/write mode
 
 ## Conventions
 

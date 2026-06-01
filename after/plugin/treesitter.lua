@@ -7,6 +7,7 @@ require('nvim-treesitter').setup {
 -- Install parsers if missing — no-op when already installed, runs async
 require('nvim-treesitter').install {
   'c', 'lua', 'json', 'yaml', 'go', 'rust', 'javascript', 'typescript', 'proto',
+  'markdown', 'markdown_inline', -- required by render-markdown.nvim
 }
 
 -- Enable treesitter features per filetype

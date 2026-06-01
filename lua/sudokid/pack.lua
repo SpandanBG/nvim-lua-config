@@ -136,6 +136,11 @@ local function utilities()
   vim.pack.add({
     'https://github.com/kevinhwang91/nvim-ufo',
   })
+
+  -- Markdown in-buffer rendering (toggle per-buffer with <leader>mr)
+  vim.pack.add({
+    'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+  })
 end
 
 essential()

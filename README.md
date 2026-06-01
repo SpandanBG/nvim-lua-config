@@ -133,6 +133,12 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 | `]c` | n | Next git hunk in buffer (falls back to vim's diff-mode `]c` when in diff) |
 | `[c` | n | Previous git hunk in buffer (falls back to vim's diff-mode `[c` when in diff) |
 
+### Markdown
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>mr` | n | Toggle markdown render (read ↔ write mode) — markdown buffers only |
+
 ### Surround (mini.surround)
 
 | Key | Action |
@@ -285,6 +291,14 @@ The right side of the statusline shows the LSP client name plus a live `xx%` ind
 - Fold gutter shows `▾` (open) / `▸` (closed) chevrons next to line numbers (`foldcolumn=1`).
 - Folded lines are tinted **plum** (`#3D2D5C`); `fg` is intentionally unset so ufo's extmark-rendered syntax highlighting on the folded line shows through.
 - `foldlevel = foldlevelstart = 99` — folds stay open across new windows and buffers; nothing auto-closes on edit or cursor move.
+
+### Markdown read/write toggle (render-markdown.nvim)
+
+Markdown buffers open in **write mode** (raw source). Press `<leader>mr` to flip to **read mode** — headings, bold/italic, list markers, and code blocks are rendered inline via treesitter + extmarks. `<leader>mr` again returns to raw.
+
+- `render_modes = true` — styles stay applied across normal/insert/visual, so `hjkl`/`/`-search work as usual while reading.
+- Buffer-local keymap, set via a `FileType markdown` autocmd in `after/plugin/render-markdown.lua` — does nothing in non-markdown buffers.
+- Requires `markdown` + `markdown_inline` treesitter parsers (installed automatically via `after/plugin/treesitter.lua`).
 
 ### `folded_dirty` — git-aware fold tint
 
