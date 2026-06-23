@@ -121,6 +121,8 @@ sudo apt install ripgrep fd-find fzf nodejs npm
 
 | Key | Mode | Action |
 |-----|------|--------|
+| `<M-q>` | i/n | (Inside Telescope) Send `<Tab>`-selected items to quickfix list and open it |
+| `<C-q>` | i/n | (Inside Telescope) Send all results to quickfix list and open it |
 | `<leader>oq` | n | Open quickfix list |
 | `<leader>cq` | n | Clear quickfix list |
 | `]q` | n | Next quickfix item |
